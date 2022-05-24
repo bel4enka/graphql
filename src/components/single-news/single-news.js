@@ -11,6 +11,7 @@ const INCREMENT_LIKE = gql`
     mutation Like($uuid: String!) {
         like(uuid: $uuid) {
             likes
+            uuid
         }
     }
 
@@ -20,6 +21,7 @@ const DECREMENT_LIKE = gql`
     mutation Dislike($uuid: String!) {
         dislike(uuid: $uuid) {
             likes
+            uuid
         }
     }
 
@@ -41,6 +43,7 @@ const SINGLE_NEWS = gql`
             author
             likes
             text
+            uuid
         }
     }
 `;
@@ -52,25 +55,15 @@ export const SingleNews = () => {
     });
     const [likeFunction] = useMutation(INCREMENT_LIKE, {
         variables: { uuid },
-        refetchQueries: [
-            SINGLE_NEWS, 
-            NEWS,// Подумать как здесь лучше обновлять cache
-        ],
+        
     });
     const [dislikeFunction] = useMutation(DECREMENT_LIKE, {
         variables: { uuid },
-        refetchQueries: [
-            SINGLE_NEWS,
-            NEWS,// Подумать как здесь лучше обновлять cache
-        ],
     });
 
     const [deleteFunction] = useMutation(DELETE_NEWS, {
         variables: { uuid },
-        refetchQueries: [
-            SINGLE_NEWS,
-            NEWS,// Подумать как здесь лучше обновлять cache
-        ],
+        
     });
     
     function likeHandler () {
