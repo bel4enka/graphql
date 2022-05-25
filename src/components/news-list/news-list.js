@@ -5,6 +5,7 @@ import {
 import {gql, useQuery} from '@apollo/client';
 import {NewsListItem} from "./news-list-item/news-list-item";
 import {QueryResult} from "../query-result/query-result";
+import {useEffect} from "react";
 
 export const NEWS = gql`
     query News {
@@ -18,16 +19,19 @@ export const NEWS = gql`
     }
 `;
 
+
 export const NewsList = () => {
-    const {loading, error, data} = useQuery(NEWS);
-    
+    const {loading, error, data, refetch} = useQuery(NEWS);
+    useEffect(() => {
+        refetch()
+    },[])
 
     return (
         <Container sx={{ py: 8 }} maxWidth="md">
             <Grid container spacing={4}>
                 <QueryResult error={error} loading={loading} data={data}>
                 {data?.news?.map((item,i)=>
-                    <NewsListItem key={i} item={item}/>
+                    <NewsListItem key={item.uuid} item={item}/>
                 )}
                 </QueryResult>
             </Grid>

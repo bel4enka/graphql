@@ -15,9 +15,7 @@ const client = new ApolloClient({
             News: {
                 keyFields: ["uuid"],
             },
-            SingleNews: {
-                keyFields: ["uuid"],
-            },
+           
         },
     })
 });

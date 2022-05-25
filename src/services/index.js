@@ -9,7 +9,7 @@ const template = `{
     "text": "{{lorem min=50 max=100}}",
     "likes": 0
 }`;
-const news = [...new Array(10)].map(_ => JSON.parse(dummyjson.parse(template)));
+const news = [...new Array(12)].map(_ => JSON.parse(dummyjson.parse(template)));
 
 // The GraphQL schema
 const typeDefs = gql`
